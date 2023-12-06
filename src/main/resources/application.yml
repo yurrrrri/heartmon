@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    include: key
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
