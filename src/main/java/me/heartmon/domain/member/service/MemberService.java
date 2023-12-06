@@ -25,11 +25,10 @@ public class MemberService {
         return memberRepository.findByUsername(username).orElseThrow();
     }
 
-    public Member signup() {
-        return null;
-    }
-
-    public Member signin() {
-        return null;
+    public Member signup(String username, String password) {
+        return memberRepository.save(Member.builder()
+                .username(username)
+                .password(passwordEncoder.encode(password))
+                .build());
     }
 }

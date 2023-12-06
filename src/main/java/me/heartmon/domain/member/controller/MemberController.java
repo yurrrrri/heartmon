@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/usr")
 public class MemberController {
 
+    @GetMapping("/signin")
+    public String signin() {
+        return "usr/signin";
+    }
+
     @GetMapping("/signup")
     public String signup() {
         return "usr/signup";
