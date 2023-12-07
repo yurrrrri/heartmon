@@ -1,6 +1,7 @@
 package me.heartmon.domain.member.service;
 
 import lombok.RequiredArgsConstructor;
+import me.heartmon.domain.member.dto.MemberSignupDto;
 import me.heartmon.domain.member.entity.Member;
 import me.heartmon.domain.member.repository.MemberRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,10 +26,10 @@ public class MemberService {
         return memberRepository.findByUsername(username).orElseThrow();
     }
 
-    public Member signup(String username, String password) {
+    public Member signup(MemberSignupDto dto) {
         return memberRepository.save(Member.builder()
-                .username(username)
-                .password(passwordEncoder.encode(password))
+                .username(dto.getUsername())
+                .password(passwordEncoder.encode(dto.getPassword()))
                 .build());
     }
 }
