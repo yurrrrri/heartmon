@@ -72,5 +72,21 @@ class MemberControllerTest {
                 .andExpect(redirectedUrl("/"));
     }
 
-    // TODO: 유효하지 않은 비밀번호 테스트
+    // TODO: 유효하지 않은 비밀번호 테스트 - redirect 되도록 수정
+    @Test
+    void signupWhenGivenInvalidPassword() throws Exception {
+        // given
+        MemberSignupDto dto = new MemberSignupDto("user1", "123");
+
+        //when
+        ResultActions resultActions = mvc
+                .perform(post("/usr/signup")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(dto)));
+
+        // then
+        resultActions
+                .andExpect(status().is4xxClientError());
+    }
 }
