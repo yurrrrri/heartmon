@@ -5,9 +5,44 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign In | Heartmon</title>
+
+    <script src="https://kit.fontawesome.com/87140d707c.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gasoek+One&family=Orbit&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/usr/signin.css">
+    <title>Sign in | Heartmon</title>
 </head>
 <body>
-로그인 페이지
+
+<div class="nav">
+    <div class="left"></div>
+    <a href="/" class="logo">Heartmon</a>
+    <div class="right">
+        <a href="javascript:void(0)"><i class="fa-solid fa-bars"></i></a>
+    </div>
+</div>
+
+<main class="main">
+    <div class="inner">
+        <div class="input-group">
+            <label for="username">
+                <p><i class="fa-solid fa-user-large"></i>/ 아이디</p>
+                <input type="text" id="username" name="username">
+            </label>
+            <label for="password">
+                <p><i class="fa-solid fa-unlock"></i>/ 비밀번호</p>
+                <input type="password" id="password" name="password">
+            </label>
+        </div>
+
+        <div class="btn-group">
+            <a href="javascript:void(0)" class="btn">로그인</a>
+            <a href="/usr/signup" class="btn">회원가입</a>
+        </div>
+    </div>
+</main>
+
 </body>
 </html>

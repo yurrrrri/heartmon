@@ -71,4 +71,6 @@ class MemberControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/"));
     }
+
+    // TODO: 유효하지 않은 비밀번호 테스트
 }

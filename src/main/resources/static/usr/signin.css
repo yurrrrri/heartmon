@@ -11,7 +11,7 @@ body {
     margin: auto;
 }
 a {
-    color: #000;
+    color: #333;
     text-decoration: none;
 }
 i {
@@ -58,4 +58,49 @@ i {
     height: 720px;
     top: 30px;
     left: 30px;
+}
+
+/*CUSTOM*/
+.main .inner .input-group {
+    position: absolute;
+    top: 100px;
+}
+.main .inner .input-group label {
+    display: block;
+    width: 100%;
+}
+.main .inner .input-group label i {
+    margin-right: 8px;
+}
+.main .inner .input-group label input {
+    background-color: #F9F5F6;
+    display: block;
+    width: 346px;
+    height: 40px;
+    border: 3px solid #333;
+    border-radius: 5px;
+    padding: 0 10px;
+    font-size: 20px;
+}
+.main .inner .btn-group {
+    position: absolute;
+    bottom: 60px;
+}
+.main .inner .btn-group .btn {
+    display: block;
+    background-color: #FDCEDF;
+    border: 3px solid #ffb0cc;
+    border-radius: 5px;
+    font-weight: 700;
+    width: 360px;
+    height: 40px;
+    text-align: center;
+    padding-top: 8px;
+    margin-top: 20px;
+    transition: 0.4s;
+}
+.main .inner .btn-group .btn:hover {
+    background-color: #ffb0cc;
+    border: 3px solid #f385ab;
+    box-shadow: 3px 3px 0px #000;
 }
