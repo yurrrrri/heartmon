@@ -1,0 +1,52 @@
+html {
+    background-color: #F9F5F6;
+}
+body {
+    position: relative;
+    font-family: 'Orbit', sans-serif;
+    width: 425px;
+    height: 845px;
+    font-size: 16px;
+    margin: auto;
+}
+a {
+    text-decoration: none;
+}
+i {
+    font-size: 22px;
+}
+.nav {
+    position: relative;
+    top: 0;
+    width: 425px;
+    height: 45px;
+    background-color: #F2BED1;
+    text-align: center;
+}
+.nav .left {
+}
+.nav .logo {
+    font-family: 'Gasoek One', sans-serif;
+    font-size: 24px;
+    padding-top: 3px;
+}
+.nav .right {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
+.main {
+    background-color: #fff;
+    position: absolute;
+    margin: auto;
+    width: 425px;
+    height: 800px;
+    bottom: 0;
+}
+.main .inner {
+    position: absolute;
+    width: 365px;
+    height: 740px;
+    top: 30px;
+    left: 30px;
+}
