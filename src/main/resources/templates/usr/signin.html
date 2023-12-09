@@ -10,36 +10,38 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gasoek+One&family=Orbit&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 
+    <link rel="stylesheet" href="/basic/basic.css">
     <link rel="stylesheet" href="/usr/signin.css">
     <title>Sign in | Heartmon</title>
 </head>
 <body>
 
 <div class="nav">
-    <div class="left"></div>
-    <a href="/" class="logo">Heartmon</a>
-    <div class="right">
+    <div class="left">
         <a href="javascript:void(0)"><i class="fa-solid fa-bars"></i></a>
     </div>
+    <a href="/" class="logo">Heartmon</a>
+    <div class="right"></div>
 </div>
 
 <main class="main">
     <div class="inner">
-        <div class="input-group">
+        <form class="box" th:action method="POST">
             <label for="username">
                 <p><i class="fa-solid fa-user-large"></i>/ 아이디</p>
-                <input type="text" id="username" name="username">
+                <input type="text" id="username" name="username" class="input is-medium">
             </label>
             <label for="password">
-                <p><i class="fa-solid fa-unlock"></i>/ 비밀번호</p>
-                <input type="password" id="password" name="password">
+                <p><i class="fa-solid fa-lock"></i>/ 비밀번호</p>
+                <input type="password" id="password" name="password" class="input is-medium">
             </label>
-        </div>
+        </form>
 
         <div class="btn-group">
-            <a href="javascript:void(0)" class="btn">로그인</a>
-            <a href="/usr/signup" class="btn">회원가입</a>
+            <button class="button is-link is-fullwidth is-medium">로그인</button>
+            <a href="/usr/signup" class="button is-link is-light is-fullwidth is-medium">회원가입</a>
         </div>
     </div>
 </main>
