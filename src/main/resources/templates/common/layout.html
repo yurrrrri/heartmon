@@ -29,10 +29,10 @@
             <a href="/usr/signin" class="navbar-item" sec:authorize="isAnonymous()">
                 로그인
             </a>
-            <a href="javascript:void(0)" class="navbar-item" sec:authorize="isAuthenticated()" onclick="$(this).next().submit();">
+            <a class="navbar-item" sec:authorize="isAuthenticated()" onclick="document.querySelector('#logout-form').submit(); return false;">
                 로그아웃
             </a>
-            <form th:action="|/usr/logout|" method="POST"></form>
+            <form id="logout-form" th:action="|/usr/logout|" method="POST"></form>
         </div>
     </div>
 

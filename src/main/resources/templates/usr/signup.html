@@ -1,13 +1,96 @@
 <html lang="ko" layout:decorate="~{common/layout.html}">
 <head>
-    <link rel="stylesheet" href="/usr/signup.css">
+    <link rel="stylesheet" href="/usr/signin.css">
     <title>Sign Up | Heartmon</title>
 </head>
 <body>
 
 <main layout:fragment="main" class="main">
+
+    <script>
+        function toast(msg) {
+            Toastify({
+                text: msg,
+                close: true,
+                style: {
+                    backgroundColor: "#e5e8fa",
+                    marginTop: "60px",
+                    minWidth: "250px",
+                    textAlign: "right"
+                }
+            }).showToast();
+        }
+
+        function signup__submit() {
+            const form = document.querySelector("form.box");
+
+            let username = form.username.value.trim();
+            let password1 = form.password1.value.trim();
+            let password2 = form.password2.value.trim();
+
+            if (username.length < 4) {
+                toast("아이디는 4자 이상 30자 이하입니다.");
+                form.username.focus();
+                return;
+            }
+
+            if (password1.length < 6) {
+                toast("비밀번호는 6자 이상 30자 이하입니다.");
+                form.password1.focus();
+                return;
+            } else if (password2.length < 6) {
+                toast("비밀번호는 6자 이상 30자 이하입니다.");
+                form.password2.focus();
+                return;
+            }
+
+            if (password2 != password1) {
+                toast("비밀번호를 확인해주세요.");
+                form.password2.focus();
+                return;
+            }
+
+            const data = {
+                username: username,
+                password: password1
+            };
+
+            fetch('/usr/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+                .then(data => {
+                    window.location.href = "/";
+                });
+        }
+    </script>
+
     <div class="inner">
-        회원가입 페이지
+        <form class="box" th:action method="POST">
+            <label for="username">
+                <p><i class="fa-solid fa-user-large"></i>/ 아이디</p>
+                <input type="text" id="username" name="username" maxlength="30" class="input is-medium"
+                       placeholder="heartmon">
+            </label>
+            <label for="password1">
+                <p><i class="fa-solid fa-lock"></i>/ 비밀번호</p>
+                <input type="password" id="password1" name="password1" maxlength="30" class="input is-medium"
+                       placeholder="********">
+            </label>
+            <label for="password2">
+                <p><i class="fa-solid fa-lock"></i>/ 비밀번호 확인</p>
+                <input type="password" id="password2" name="password2" maxlength="30" class="input is-medium"
+                       placeholder="********">
+            </label>
+        </form>
+
+        <div class="btn-group">
+            <button class="button is-link is-fullwidth is-medium" onclick="signup__submit(); return false;">회원가입 완료
+            </button>
+        </div>
     </div>
 </main>
 
