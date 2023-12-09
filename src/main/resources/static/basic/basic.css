@@ -26,10 +26,13 @@ a {
     font-size: 22px;
     color: #fff;
 }
+.nav .navbar-link:hover i {
+    color: #485fc7;
+}
 .nav .left {
     position: absolute;
-    left: 30px;
-    top: 20px;
+    left: 20px;
+    top: 10px;
 }
 .nav .logo {
     position: absolute;
@@ -41,8 +44,8 @@ a {
 }
 .nav .right {
     position: absolute;
-    right: 30px;
-    top: 20px;
+    right: 20px;
+    top: 10px;
 }
 .main {
     background-color: #fff;

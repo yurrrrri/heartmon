@@ -16,10 +16,27 @@
 <body>
 
 <div class="nav">
-    <div class="left">
-        <a href="javascript:void(0)"><i class="fa-solid fa-bars"></i></a>
+    <div class="left navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+            <i class="fa-solid fa-bars"></i>
+        </a>
+
+        <div class="navbar-dropdown">
+            <a href="javascript:void(0)" class="navbar-item" sec:authorize="isAuthenticated()">
+                마이 페이지
+            </a>
+            <a href="/usr/signin" class="navbar-item" sec:authorize="isAnonymous()">
+                로그인
+            </a>
+            <a href="javascript:void(0)" class="navbar-item" sec:authorize="isAuthenticated()" onclick="$(this).next().submit();">
+                로그아웃
+            </a>
+            <form th:action="|/usr/logout|" method="POST"></form>
+        </div>
     </div>
+
     <a href="/" class="logo">Heartmon</a>
+
     <div class="right"></div>
 </div>
 
