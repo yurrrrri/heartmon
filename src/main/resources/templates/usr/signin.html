@@ -6,20 +6,67 @@
 <body>
 
 <main layout:fragment="main" class="main">
+
+    <script>
+        function toast(msg) {
+            Toastify({
+                text: msg,
+                close: true,
+                style: {
+                    backgroundColor: "#e5e8fa",
+                    marginTop: "60px",
+                    minWidth: "250px",
+                    textAlign: "right"
+                }
+            }).showToast();
+        }
+
+        function signin__submit() {
+            const form = document.querySelector("form.box");
+
+            let username = form.username.value.trim();
+            let password = form.password.value.trim();
+
+            if (username.length === 0) {
+                toast("아이디를 입력해주세요.");
+                form.username.focus();
+                return;
+            } else if (username.length < 4) {
+                toast("아이디는 4자 이상 30자 이하입니다.");
+                form.username.focus();
+                return;
+            }
+
+            if (password.length === 0) {
+                toast("비밀번호를 입력해주세요.");
+                form.password.focus();
+                return;
+            } else if (password.length < 6) {
+                toast("비밀번호는 6자 이상 30자 이하입니다.");
+                form.password.focus();
+                return;
+            }
+
+            form.submit();
+        }
+    </script>
+
     <div class="inner">
-        <form class="box" th:action method="POST">
+        <form class="box" method="POST">
             <label for="username">
                 <p><i class="fa-solid fa-user-large"></i>/ 아이디</p>
-                <input type="text" id="username" name="username" class="input is-medium" placeholder="heartmon">
+                <input type="text" id="username" name="username" maxlength="30" class="input is-medium"
+                       placeholder="heartmon">
             </label>
             <label for="password">
                 <p><i class="fa-solid fa-lock"></i>/ 비밀번호</p>
-                <input type="password" id="password" name="password" class="input is-medium" placeholder="********">
+                <input type="password" id="password" name="password" maxlength="30" class="input is-medium"
+                       placeholder="********">
             </label>
         </form>
 
         <div class="btn-group">
-            <button class="button is-link is-fullwidth is-medium">로그인</button>
+            <button class="button is-link is-fullwidth is-medium" onclick="signin__submit()">로그인</button>
             <a href="/usr/signup" class="button is-link is-light is-fullwidth is-medium">회원가입</a>
         </div>
     </div>
