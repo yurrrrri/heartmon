@@ -2,6 +2,7 @@ package me.heartmon.domain.member.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.heartmon.domain.member.dto.MemberSignupDto;
+import me.heartmon.domain.member.service.MemberService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,9 +26,11 @@ class MemberControllerTest {
     private MockMvc mvc;
     @Autowired
     private ObjectMapper mapper;
+    @Autowired
+    MemberService memberService;
 
     @Test
-    void signin() throws Exception {
+    void signinForm() throws Exception {
         // when
         ResultActions resultActions = mvc
                 .perform(get("/usr/signin"));
@@ -38,6 +41,24 @@ class MemberControllerTest {
                 .andExpect(handler().methodName("signin"))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(view().name("usr/signin"));
+    }
+
+    @Test
+    void signin() throws Exception {
+        // given
+        memberService.signup(new MemberSignupDto("user1", "test1234"));
+
+        // when
+        ResultActions resultActions = mvc
+                .perform(post("/usr/signin")
+                        .with(csrf())
+                        .param("username", "user1")
+                        .param("password", "test1234"));
+
+        // then
+        resultActions
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrlPattern("/**"));
     }
 
     @Test
@@ -57,7 +78,7 @@ class MemberControllerTest {
     @Test
     void signup() throws Exception {
         // given
-        MemberSignupDto dto = new MemberSignupDto("user1", "test1234");
+        MemberSignupDto dto = new MemberSignupDto("user2", "test1234");
 
         //when
         ResultActions resultActions = mvc
