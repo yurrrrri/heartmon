@@ -3,17 +3,24 @@ package me.heartmon.global.resultData;
 import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import me.heartmon.global.code.Code;
 
 @Getter
 @AllArgsConstructor
-public class ResultData {
+public class ResultData<T> {
 
     private String code;
     private String message;
 
     @Nullable
-    private Object data;
+    private T data;
+
+    public static <T> ResultData<T> of(String code, String message, T data) {
+        return new ResultData<>(code, message, data);
+    }
+
+    public static <T> ResultData<T> of(String code, String message) {
+        return new ResultData<>(code, message, null);
+    }
 
     public boolean hasData() {
         return data != null;

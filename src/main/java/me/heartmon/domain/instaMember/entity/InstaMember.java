@@ -21,6 +21,7 @@ public class InstaMember extends BaseEntity {
 
     @Column(unique = true)
     private String username;
+    private boolean isSelf;
 
     @OneToMany(mappedBy = "fromInstaMember", cascade = CascadeType.ALL)
     @OrderBy("id desc")
@@ -38,5 +39,9 @@ public class InstaMember extends BaseEntity {
 
     public void addYourHeartTarget(HeartTarget heartTarget) {
         yourHeartTargets.add(0, heartTarget);
+    }
+
+    public void setIsSelf() {
+        this.isSelf = true;
     }
 }

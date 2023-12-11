@@ -28,8 +28,6 @@ public class Member extends BaseEntity {
     private String username;
     private String password;
 
-    private String typeCode;
-
     @OneToOne
     private InstaMember instaMember;
 
@@ -51,5 +49,9 @@ public class Member extends BaseEntity {
 
     public boolean isConnectedInstaMember() {
         return instaMember != null;
+    }
+
+    public void connectInstaMember(InstaMember instaMember) {
+        this.instaMember = instaMember;
     }
 }
