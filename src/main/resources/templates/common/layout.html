@@ -45,6 +45,63 @@
 <main layout:fragment="main"></main>
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script th:inline="javascript">
+    function notice(msg) {
+        Toastify({
+            text: msg,
+            close: true,
+            style: {
+                background: "none",
+                backgroundColor: "#6a80ff",
+                marginTop: "60px",
+                minWidth: "250px",
+                textAlign: "right"
+            }
+        }).showToast();
+    }
+
+    function warn(msg) {
+        Toastify({
+            text: msg,
+            close: true,
+            style: {
+                background: "none",
+                backgroundColor: "#ffb71e",
+                marginTop: "60px",
+                minWidth: "250px",
+                textAlign: "right"
+            }
+        }).showToast();
+    }
+
+    const signupSuccessMessage = sessionStorage.getItem("signup");
+
+    if (signupSuccessMessage) {
+        notice(signupSuccessMessage);
+        sessionStorage.removeItem("signup");
+    }
+
+    const params = /*[[ ${param} ]]*/ null;
+
+    if (params.msg) {
+        notice(params.msg[0]);
+    }
+
+    if (params.errorMsg) {
+        warn(params.errorMsg[0]);
+    }
+
+    // history.back 에 의해서 돌아온 경우에 실행됨
+    // 평소에도 실행됨
+    $(window).bind("pageshow", function (event) {
+        const localStorageKeyAboutHistoryBackErrorMsg = "historyBackErrorMsg___" + location.href;
+
+        if (localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg)) {
+            warn(localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg));
+            localStorage.removeItem(localStorageKeyAboutHistoryBackErrorMsg);
+        }
+    });
+</script>
 
 </body>
 </html>

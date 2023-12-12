@@ -1,0 +1,19 @@
+<script th:inline="javascript">
+    // notice message
+    const localStorageKeyAboutHistoryBackMsg = /*[[${localStorageKeyAboutHistoryBackMsg}]]*/ null;
+    const historyBackMsg = /*[[${historyBackMsg}]]*/ null;
+
+    if (localStorageKeyAboutHistoryBackMsg && localStorageKeyAboutHistoryBackMsg.trim().length > 0) {
+        localStorage.setItem(localStorageKeyAboutHistoryBackMsg, historyBackMsg);
+    }
+
+    // error message
+    const localStorageKeyAboutHistoryBackErrorMsg = /*[[${localStorageKeyAboutHistoryBackErrorMsg}]]*/ null;
+    const historyBackErrorMsg = /*[[${historyBackErrorMsg}]]*/ null;
+
+    if (localStorageKeyAboutHistoryBackErrorMsg && localStorageKeyAboutHistoryBackErrorMsg.trim().length > 0) {
+        localStorage.setItem(localStorageKeyAboutHistoryBackErrorMsg, historyBackErrorMsg);
+    }
+
+    history.back();
+</script>
