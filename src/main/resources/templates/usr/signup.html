@@ -55,15 +55,16 @@
                 password: password1
             };
 
-            fetch('/usr/signup', {
-                method: 'POST',
+            axios.post('/usr/signup', data, {
                 headers: {
                     'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
+                }
             })
-                .then(data => {
+                .then(res => {
                     window.location.href = "/";
+                })
+                .catch(error => {
+                    toast(error.message);
                 });
         }
     </script>
