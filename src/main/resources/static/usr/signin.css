@@ -7,20 +7,13 @@
     width: 320px;
     margin-top: 10px;
 }
-.main .inner .box label i {
-    margin-right: 8px;
-}
 .main .inner .box label input {
     margin-top: 10px;
 }
-
-.main .inner .btn-group {
-    position: absolute;
-    width: 100%;
-    bottom: 60px;
-}
-.main .inner .btn-group .button {
-    margin-top: 10px;
-    padding-bottom: 15px;
+.main .inner .button {
+    margin-top: 20px;
     font-weight: 700;
+}
+.main .inner .button:last-child {
+    margin-top: 0;
 }

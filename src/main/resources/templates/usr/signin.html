@@ -6,43 +6,32 @@
 <body>
 
 <main layout:fragment="main" class="main">
-
     <script>
-        function toast(msg) {
-            Toastify({
-                text: msg,
-                close: true,
-                style: {
-                    backgroundColor: "#e5e8fa",
-                    marginTop: "60px",
-                    minWidth: "250px",
-                    textAlign: "right"
-                }
-            }).showToast();
+        if(sessionStorage.getItem("signup")) {
+            notice(sessionStorage.getItem("signup"));
+            sessionStorage.removeItem("signup");
         }
 
-        function signin__submit() {
-            const form = document.querySelector("form.box");
-
+        function signin__submit(form) {
             let username = form.username.value.trim();
             let password = form.password.value.trim();
 
             if (username.length === 0) {
-                toast("아이디를 입력해주세요.");
+                warn("아이디를 입력해주세요.");
                 form.username.focus();
                 return;
             } else if (username.length < 4) {
-                toast("아이디는 4자 이상 30자 이하입니다.");
+                warn("아이디는 4자 이상 30자 이하입니다.");
                 form.username.focus();
                 return;
             }
 
             if (password.length === 0) {
-                toast("비밀번호를 입력해주세요.");
+                warn("비밀번호를 입력해주세요.");
                 form.password.focus();
                 return;
             } else if (password.length < 6) {
-                toast("비밀번호는 6자 이상 30자 이하입니다.");
+                warn("비밀번호는 6자 이상 30자 이하입니다.");
                 form.password.focus();
                 return;
             }
@@ -52,7 +41,7 @@
     </script>
 
     <div class="inner">
-        <form class="box" th:action method="POST">
+        <form class="box" th:action method="POST" onsubmit="signin__submit(this); return false;">
             <label for="username">
                 <p><i class="fa-solid fa-user-large"></i>/ 아이디</p>
                 <input type="text" id="username" name="username" maxlength="30" class="input is-medium"
@@ -63,12 +52,9 @@
                 <input type="password" id="password" name="password" maxlength="30" class="input is-medium"
                        placeholder="********">
             </label>
-        </form>
-
-        <div class="btn-group">
-            <button class="button is-link is-fullwidth is-medium" onclick="signin__submit()">로그인</button>
+            <input type="submit" class="button is-link is-fullwidth is-medium" value="로그인">
             <a href="/usr/signup" class="button is-link is-light is-fullwidth is-medium">회원가입</a>
-        </div>
+        </form>
     </div>
 </main>
 

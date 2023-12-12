@@ -1,6 +1,6 @@
 <html lang="ko" layout:decorate="~{common/layout.html}">
 <head>
-    <link rel="stylesheet" href="/usr/signin.css">
+    <link rel="stylesheet" href="/usr/signup.css">
     <title>Sign Up | Heartmon</title>
 </head>
 <body>
@@ -8,69 +8,52 @@
 <main layout:fragment="main" class="main">
 
     <script>
-        function toast(msg) {
-            Toastify({
-                text: msg,
-                close: true,
-                style: {
-                    backgroundColor: "#e5e8fa",
-                    marginTop: "60px",
-                    minWidth: "250px",
-                    textAlign: "right"
-                }
-            }).showToast();
-        }
-
-        function signup__submit() {
-            const form = document.querySelector("form.box");
-
+        function signup__submit(form) {
             let username = form.username.value.trim();
             let password1 = form.password1.value.trim();
             let password2 = form.password2.value.trim();
 
             if (username.length < 4) {
-                toast("아이디는 4자 이상 30자 이하입니다.");
+                warn("아이디는 4자 이상 30자 이하입니다.");
                 form.username.focus();
                 return;
             }
 
             if (password1.length < 6) {
-                toast("비밀번호는 6자 이상 30자 이하입니다.");
+                warn("비밀번호는 6자 이상 30자 이하입니다.");
                 form.password1.focus();
                 return;
             } else if (password2.length < 6) {
-                toast("비밀번호는 6자 이상 30자 이하입니다.");
+                warn("비밀번호는 6자 이상 30자 이하입니다.");
                 form.password2.focus();
                 return;
             }
 
             if (password2 != password1) {
-                toast("비밀번호를 확인해주세요.");
+                warn("비밀번호를 확인해주세요.");
                 form.password2.focus();
                 return;
             }
 
-            const data = {
-                username: username,
+            const result = {
+                username : username,
                 password: password1
-            };
+            }
 
-            axios.post('/usr/signup', data, {
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-                .then(res => {
-                    window.location.href = "/";
+            axios.post('/usr/signup', result)
+                .then(function (response) {
+                    sessionStorage.setItem("signup", "회원가입이 완료되었습니다.");
+                    window.location.href='/usr/signin';
+                    setTimeout("location.reload()", 200);
                 })
-                .catch(error => {
-                    toast(error.message);
+                .catch(function (error) {
+                    warn("이미 등록된 아이디입니다.");
                 });
         }
     </script>
 
     <div class="inner">
-        <form class="box" th:action method="POST">
+        <form class="box" th:action method="POST" onsubmit="signup__submit(this); return false;">
             <label for="username">
                 <p><i class="fa-solid fa-user-large"></i>/ 아이디</p>
                 <input type="text" id="username" name="username" maxlength="30" class="input is-medium"
@@ -86,12 +69,8 @@
                 <input type="password" id="password2" name="password2" maxlength="30" class="input is-medium"
                        placeholder="********">
             </label>
+            <input type="submit" class="button is-link is-fullwidth is-medium"  value="회원가입 완료">
         </form>
-
-        <div class="btn-group">
-            <button class="button is-link is-fullwidth is-medium" onclick="signup__submit(); return false;">회원가입 완료
-            </button>
-        </div>
     </div>
 </main>
 
