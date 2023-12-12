@@ -24,7 +24,7 @@
         </a>
 
         <div class="navbar-dropdown">
-            <a href="javascript:void(0)" class="navbar-item" sec:authorize="isAuthenticated()">
+            <a href="/usr/me" class="navbar-item" sec:authorize="isAuthenticated()">
                 마이 페이지
             </a>
             <a href="/usr/signin" class="navbar-item" sec:authorize="isAnonymous()">
@@ -81,18 +81,6 @@
         sessionStorage.removeItem("signup");
     }
 
-    const params = /*[[ ${param} ]]*/ null;
-
-    if (params.msg) {
-        notice(params.msg[0]);
-    }
-
-    if (params.errorMsg) {
-        warn(params.errorMsg[0]);
-    }
-
-    // history.back 에 의해서 돌아온 경우에 실행됨
-    // 평소에도 실행됨
     $(window).bind("pageshow", function (event) {
         const localStorageKeyAboutHistoryBackErrorMsg = "historyBackErrorMsg___" + location.href;
 

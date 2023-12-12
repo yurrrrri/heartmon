@@ -8,6 +8,7 @@ import me.heartmon.global.req.Req;
 import me.heartmon.global.resultData.ResultData;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,5 +40,12 @@ public class MemberController {
         if (result.isFail()) return req.historyBack(result.getMessage());
 
         return req.redirectWithMsg("/usr/signin", result);
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/me")
+    public String showMe(Model model) {
+        model.addAttribute("member", req.getMember());
+        return "usr/me";
     }
 }

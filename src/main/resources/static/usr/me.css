@@ -1,0 +1,17 @@
+.inner.box {
+    height: 660px;
+}
+
+.box .image {
+    display: block;
+    width: 100%;
+    height: 325px;
+    background-color: #e5e8fa;
+}
+.box .text,
+.box .date{
+    margin-top: 20px;
+}
+.box .instaName {
+    font-weight: 700;
+}
