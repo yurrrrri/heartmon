@@ -1,6 +1,7 @@
 package me.heartmon.domain.heartTarget.service;
 
 import lombok.RequiredArgsConstructor;
+import me.heartmon.domain.heartTarget.dto.HeartTargetDto;
 import me.heartmon.domain.heartTarget.entity.HeartTarget;
 import me.heartmon.domain.heartTarget.repository.HeartTargetRepository;
 import me.heartmon.domain.instaMember.entity.InstaMember;
@@ -36,7 +37,9 @@ public class HeartTargetService {
         return heartTargetRepository.findByFromInstaMember_Id(fromInstaMemberId);
     }
 
-    public ResultData heart(Member member, String username, int reasonPoint) {
+    public ResultData heart(Member member, HeartTargetDto dto) {
+        String username = dto.getUsername();
+
         if (!member.isConnectedInstaMember()) {
             return ResultData.of("F-H1", "인스타그램 아이디를 등록해주세요.");
         }
@@ -53,7 +56,7 @@ public class HeartTargetService {
                 .fromInstaMemberUsername(fromInstaMember.getUsername())
                 .toInstaMember(toInstaMember)
                 .toInstaMemberUsername(toInstaMember.getUsername())
-                .reasonPoint(reasonPoint)
+                .reasonPoint(dto.getReasonPoint())
                 .build();
 
         heartTargetRepository.save(heartTarget);
@@ -64,9 +67,17 @@ public class HeartTargetService {
         return ResultData.of("S-H1", "%s 님이 하트되었습니다!".formatted(username));
     }
 
-    public ResultData cancel(Member member, HeartTarget heartTarget) {
+    public ResultData cancel(Member member, Long heartTargetId) {
+        Optional<HeartTarget> opHeartTarget = findById(heartTargetId);
+
+        if (opHeartTarget.isEmpty()) {
+            return ResultData.of("F-H3", "존재하지 않는 데이터입니다.");
+        }
+
+        HeartTarget heartTarget = opHeartTarget.get();
+
         if (!member.getInstaMember().equals(heartTarget.getFromInstaMember())) {
-            return ResultData.of("F-H3", "하트를 취소할 권한이 없습니다.");
+            return ResultData.of("F-H4", "하트를 취소할 권한이 없습니다.");
         }
 
         String target = heartTarget.getToInstaMemberUsername();

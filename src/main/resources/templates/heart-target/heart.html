@@ -1,0 +1,63 @@
+<html lang="ko" layout:decorate="~{common/layout.html}">
+<head>
+    <title>Heart | Heartmon</title>
+    <style>
+        .notification {
+            text-align: center;
+        }
+        .notification i {
+            display: block;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<main layout:fragment="main" class="main">
+    <script>
+        function heart__submit(form) {
+            const username = form.username.value.trim();
+
+            if (username.length === 0) {
+                warn("상대방의 아이디를 입력해주세요.");
+                form.username.focus();
+                return;
+            } else if (username.length < 4) {
+                warn("4자 이상 30자 이하의 아이디를 입력해주세요.");
+                form.username.focus();
+                return;
+            }
+
+            form.submit();
+        }
+    </script>
+
+    <section th:if="${!@req.member.connectedInstaMember}">
+        <div class="inner">
+            <div class="box">
+                <div class="notification">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span th:text="${@req.member.username}"></span> 님의<br>인스타그램 아이디를<br>먼저 등록해주세요!
+                </div>
+                <a href="/insta-member/connect" class="button is-link is-medium is-fullwidth">아이디 등록하기</a>
+            </div>
+        </div>
+    </section>
+
+    <section th:if="${@req.member.connectedInstaMember}">
+        <div class="inner">
+            <form class="box" th:action method="POST" onsubmit="heart__submit(this); return false;"
+                  th:object="${heartTargetDto}">
+                <label for="username">
+                    <p><i class="fa-solid fa-user-large"></i>/ 상대방의 인스타그램 아이디</p>
+                    <input type="text" id="username" name="username" maxlength="30" class="input is-medium"
+                           placeholder="heartmon">
+                </label>
+                <input type="submit" class="button is-link is-fullwidth is-medium" value="등록하기">
+            </form>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>
