@@ -1,21 +1,26 @@
-.inner.box {
-    height: 660px;
-}
-
-.box .image {
+.box1 .image {
     display: block;
     width: 100%;
     height: 325px;
     background-color: #e5e8fa;
 }
-.box .text,
-.box .date{
+.box1 .text {
     margin-top: 20px;
 }
-.box .instaName {
+.box1 .instaName {
     font-weight: 700;
 }
-.box i {
+.box1 i {
     margin-right: 8px;
     font-size: 18px;
+}
+
+.box2 {
+    display: flex;
+}
+.box2 i {
+    padding-top: 5px;
+    color: #485fc7;
+    font-size: 40px;
+    margin-right: 20px;
 }

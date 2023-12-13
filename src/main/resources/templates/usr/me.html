@@ -6,13 +6,20 @@
 <body>
 
 <main layout:fragment="main" class="main">
-    <div class="inner box">
-        <p class="username title is-4">Hello! @<span th:text="${member.username}"></span></p>
-        <div class="image"></div>
-        <p class="text"><i class="fa-brands fa-instagram"></i>인스타그램 아이디 / <span class="instaName" th:if="${member.instaMember != null}" th:text="${member.instaMember.username}"></span></p>
-        <div class="date">
-            <p><span th:text="${#temporals.format(member.createdAt, 'yyyy년 MM월 dd일 HH시 mm분')}"></span>에</p>
-            <p>가입하셨어요.</p>
+    <div class="inner">
+        <div class="box box1">
+            <p class="username title is-4">Hello! @<span th:text="${member.username}"></span></p>
+            <div class="image"></div>
+            <p class="text"><i class="fa-brands fa-instagram"></i>인스타그램 아이디 /
+                <a href="/insta-member/connect" th:if="${member.instaMember == null}" class="button is-small">아이디
+                    등록하기</a>
+                <span class="instaName" th:if="${member.instaMember != null}"
+                      th:text="${member.instaMember.username}"></span>
+            </p>
+        </div>
+        <div class="box box2">
+            <i class="fa-regular fa-heart"></i>
+            <p><span th:text="${#temporals.format(member.createdAt, 'yyyy년 MM월 dd일 HH시 mm분')}"></span>에<br>가입하셨어요.</p>
         </div>
     </div>
 </main>
