@@ -56,9 +56,19 @@ a {
     bottom: 0;
 }
 .main .inner {
-    position: absolute;
+    position: relative;
     width: 365px;
     height: 720px;
     top: 30px;
     left: 30px;
+    margin: 0;
+}
+.main .inner .box i {
+    margin-right: 8px;
+}
+.main .inner .box input {
+    margin-top: 20px;
+}
+.main .inner .box .button {
+    font-weight: 700;
 }
