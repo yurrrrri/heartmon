@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequiredArgsConstructor
@@ -29,15 +28,16 @@ public class MemberController {
     }
 
     @GetMapping("/signup")
-    public String signupForm() {
+    public String signupForm(Model model) {
+        model.addAttribute("memberSignupDto", new MemberSignupDto());
         return "usr/signup";
     }
 
     @PostMapping("/signup")
-    public String signup(@Valid @RequestBody MemberSignupDto dto) {
+    public String signup(@Valid MemberSignupDto dto) {
         ResultData result = memberService.signup(dto);
 
-        if (result.isFail()) return req.historyBack(result.getMessage());
+        if (result.isFail()) return req.historyBack(result);
 
         return req.redirectWithMsg("/usr/signin", result);
     }

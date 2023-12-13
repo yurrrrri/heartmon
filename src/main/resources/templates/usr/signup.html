@@ -10,7 +10,7 @@
     <script>
         function signup__submit(form) {
             let username = form.username.value.trim();
-            let password1 = form.password1.value.trim();
+            let password1 = form.password.value.trim();
             let password2 = form.password2.value.trim();
 
             if (username.length < 4) {
@@ -35,25 +35,13 @@
                 return;
             }
 
-            const result = {
-                username : username,
-                password: password1
-            }
-
-            axios.post('/usr/signup', result)
-                .then(function (response) {
-                    sessionStorage.setItem("signup", "회원가입이 완료되었습니다.");
-                    window.location.href='/usr/signin';
-                    setTimeout("location.reload()", 200);
-                })
-                .catch(function (error) {
-                    warn("이미 등록된 아이디입니다.");
-                });
+            form.submit();
         }
     </script>
 
     <div class="inner">
-        <form class="box" th:action method="POST" onsubmit="signup__submit(this); return false;">
+        <form class="box" th:action method="POST" onsubmit="signup__submit(this); return false;"
+        th:object="${memberSignupDto}">
             <label for="username">
                 <p><i class="fa-solid fa-user-large"></i>/ 아이디</p>
                 <input type="text" id="username" name="username" maxlength="30" class="input is-medium"
@@ -61,7 +49,7 @@
             </label>
             <label for="password1">
                 <p><i class="fa-solid fa-lock"></i>/ 비밀번호</p>
-                <input type="password" id="password1" name="password1" maxlength="30" class="input is-medium"
+                <input type="password" id="password" name="password" maxlength="30" class="input is-medium"
                        placeholder="********">
             </label>
             <label for="password2">

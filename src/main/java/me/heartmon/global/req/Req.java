@@ -11,8 +11,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
-import java.util.Date;
-
 import static jakarta.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 
 @RequestScope
@@ -71,10 +69,6 @@ public class Req {
     }
 
     private String urlWithMsg(String url, String msg) {
-        return Ut.url.modifyQueryParam(url, "msg", msgWithTtl(msg));
-    }
-
-    private String msgWithTtl(String msg) {
-        return Ut.url.encode(msg) + ";ttl=" + new Date().getTime();
+        return Ut.url.modifyQueryParam(url, "msg", Ut.url.encode(msg));
     }
 }

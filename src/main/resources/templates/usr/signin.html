@@ -7,11 +7,6 @@
 
 <main layout:fragment="main" class="main">
     <script>
-        if(sessionStorage.getItem("signup")) {
-            notice(sessionStorage.getItem("signup"));
-            sessionStorage.removeItem("signup");
-        }
-
         function signin__submit(form) {
             let username = form.username.value.trim();
             let password = form.password.value.trim();
