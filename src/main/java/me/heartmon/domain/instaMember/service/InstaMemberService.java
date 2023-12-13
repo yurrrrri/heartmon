@@ -1,6 +1,7 @@
 package me.heartmon.domain.instaMember.service;
 
 import lombok.RequiredArgsConstructor;
+import me.heartmon.domain.instaMember.dto.InstaMemberConnectDto;
 import me.heartmon.domain.instaMember.entity.InstaMember;
 import me.heartmon.domain.instaMember.repository.InstaMemberRepository;
 import me.heartmon.domain.member.entity.Member;
@@ -22,7 +23,9 @@ public class InstaMemberService {
         return instaMemberRepository.findByUsername(username);
     }
 
-    public ResultData<String> connect(Member member, String username) {
+    public ResultData<String> connect(Member member, InstaMemberConnectDto dto) {
+        String username = dto.getUsername();
+
         Optional<InstaMember> opInstaMember = findByUsername(username);
 
         if (opInstaMember.isPresent()) {

@@ -9,7 +9,7 @@
     <div class="inner box">
         <p class="username title is-4">Hello! @<span th:text="${member.username}"></span></p>
         <div class="image"></div>
-        <p class="text">인스타그램 아이디 / <span class="instaName" th:if="${member.instaMember != null}" th:text="${member.instaMember.username}"></span></p>
+        <p class="text"><i class="fa-brands fa-instagram"></i>인스타그램 아이디 / <span class="instaName" th:if="${member.instaMember != null}" th:text="${member.instaMember.username}"></span></p>
         <div class="date">
             <p><span th:text="${#temporals.format(member.createdAt, 'yyyy년 MM월 dd일 HH시 mm분')}"></span>에</p>
             <p>가입하셨어요.</p>

@@ -1,0 +1,41 @@
+<html lang="ko" layout:decorate="~{common/layout.html}">
+<head>
+    <link rel="stylesheet" href="/insta-member/connect.css">
+    <title>Connecting ID | Heartmon</title>
+</head>
+<body>
+
+<main layout:fragment="main" class="main">
+    <script>
+        function connect__submit(form) {
+            const username = form.username.value.trim();
+
+            if (username.length === 0) {
+                warn("아이디를 입력해주세요.");
+                form.username.focus();
+                return;
+            } else if (username.length < 4) {
+                warn("아이디는 4자 이상 30자 이하입니다.");
+                form.username.focus();
+                return;
+            }
+
+            form.submit();
+        }
+    </script>
+
+    <div class="inner">
+        <form class="box" th:action method="POST" onsubmit="connect__submit(this); return false;"
+        th:object="${instaMemberConnectDto}">
+            <label for="username">
+                <p><i class="fa-solid fa-user-large"></i>/ 인스타그램 아이디</p>
+                <input type="text" id="username" name="username" maxlength="30" class="input is-medium"
+                       placeholder="heartmon">
+            </label>
+            <input type="submit" class="button is-link is-fullwidth is-medium" value="아이디 등록하기">
+        </form>
+    </div>
+</main>
+
+</body>
+</html>
