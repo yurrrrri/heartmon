@@ -83,7 +83,7 @@
         warn(params.errorMsg[0]);
     }
 
-    $(window).bind("pageshow", function (event) {
+    window.addEventListener("pageshow", function (event) {
         const localStorageKeyAboutHistoryBackErrorMsg = "historyBackErrorMsg___" + location.href;
 
         if (localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg)) {

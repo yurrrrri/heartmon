@@ -63,12 +63,12 @@ a {
     left: 30px;
     margin: 0;
 }
+.main .inner .button {
+    font-weight: 700;
+}
 .main .inner .box i {
     margin-right: 8px;
 }
 .main .inner .box input {
     margin-top: 20px;
-}
-.main .inner .box .button {
-    font-weight: 700;
 }

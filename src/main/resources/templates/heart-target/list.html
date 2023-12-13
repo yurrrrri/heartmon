@@ -1,12 +1,39 @@
 <html lang="ko" layout:decorate="~{common/layout.html}">
 <head>
     <title>Heart List | Heartmon</title>
+    <style>
+        th:last-child,
+        td:last-child {
+            width: 50px;
+        }
+    </style>
 </head>
 <body>
 
 <main layout:fragment="main" class="main">
     <div class="inner">
+        <div class="box" th:if="${heartTargets.isEmpty()}"
+             style="text-align: center;">
+            <p style="margin: 10px 0;">하트를 추가해보세요!</p>
+            <a href="/heart-target/heart" class="button is-link is-fullwidth is-medium">하트 등록하기</a>
+        </div>
 
+        <div class="box" th:unless="${heartTargets.isEmpty()}">
+            <table class="table is-fullwidth">
+                <thead>
+                <th>아이디</th>
+                <th>이유</th>
+                <th></th>
+                </thead>
+                <tbody th:each="heartTarget : ${heartTargets}">
+                <td th:text="${heartTarget.toInstaMemberUsername}"></td>
+                <td th:text="${heartTarget.wordOfReason}"></td>
+                <td>
+                    <a th:href="@{|/heart-target/${heartTarget.id}|}" class="button is-small">취소</a>
+                </td>
+                </tbody>
+            </table>
+        </div>
     </div>
 </main>
 

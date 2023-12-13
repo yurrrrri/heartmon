@@ -5,9 +5,13 @@
         .notification {
             text-align: center;
         }
+
         .notification i {
             display: block;
             font-size: 40px;
+        }
+        .control {
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -53,7 +57,26 @@
                     <input type="text" id="username" name="username" maxlength="30" class="input is-medium"
                            placeholder="heartmon">
                 </label>
-                <input type="submit" class="button is-link is-fullwidth is-medium" value="등록하기">
+                <div class="control">
+                    <p><i class="fa-solid fa-circle-question"></i>/ 하트를 보내는 이유</p>
+                    <label class="radio">
+                        <input type="radio" name="reasonPoint" value="1">
+                        외모
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="reasonPoint" value="2">
+                        성격
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="reasonPoint" value="3">
+                        취향
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="reasonPoint" checked value="4">
+                        기타
+                    </label>
+                </div>
+                <input type="submit" class="button is-link is-fullwidth is-medium" value="하트 등록하기">
             </form>
         </div>
     </section>
