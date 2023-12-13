@@ -10,7 +10,10 @@ import me.heartmon.global.resultData.ResultData;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @PreAuthorize("isAuthenticated()")
 @RequiredArgsConstructor
@@ -39,12 +42,17 @@ public class HeartTargetController {
     @GetMapping("/list")
     public String list(Model model) {
         InstaMember instaMember = req.getMember().getInstaMember();
+
+        if (instaMember == null) {
+            return "redirect:/insta-member/connect";
+        }
+
         model.addAttribute("heartTargets", instaMember.getMyHeartTargets());
         return "heart-target/list";
     }
 
-    @DeleteMapping("/{id}")
-    public String cancel(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public String cancel(@PathVariable(name = "id") Long id) {
         ResultData result = heartTargetService.cancel(req.getMember(), id);
 
         if (result.isFail()) return req.historyBack(result);
