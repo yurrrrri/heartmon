@@ -81,6 +81,10 @@ public class HeartTargetService {
         }
 
         String target = heartTarget.getToInstaMemberUsername();
+
+        heartTarget.getFromInstaMember().cancelMyHeartTarget(heartTarget);
+        heartTarget.getToInstaMember().cancelYourHeartTarget(heartTarget);
+
         heartTargetRepository.delete(heartTarget);
         return ResultData.of("S-H2", "%s 님에 대한 하트를 취소했습니다.".formatted(target));
     }

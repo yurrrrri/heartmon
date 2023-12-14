@@ -37,8 +37,16 @@ public class InstaMember extends BaseEntity {
         myHeartTargets.add(0, heartTarget);
     }
 
+    public void cancelMyHeartTarget(HeartTarget heartTarget) {
+        myHeartTargets.removeIf(target -> target.equals(heartTarget));
+    }
+
     public void addYourHeartTarget(HeartTarget heartTarget) {
         yourHeartTargets.add(0, heartTarget);
+    }
+
+    public void cancelYourHeartTarget(HeartTarget heartTarget) {
+        yourHeartTargets.removeIf(target -> target.equals(heartTarget));
     }
 
     public void setIsSelf() {
