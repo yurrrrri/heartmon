@@ -1,6 +1,5 @@
 package me.heartmon.domain.member.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import me.heartmon.domain.member.dto.MemberSignupDto;
 import me.heartmon.domain.member.service.MemberService;
 import org.junit.jupiter.api.Test;
@@ -25,8 +24,6 @@ class MemberControllerTest {
     @Autowired
     private MockMvc mvc;
     @Autowired
-    private ObjectMapper mapper;
-    @Autowired
     MemberService memberService;
 
     @Test
@@ -44,21 +41,21 @@ class MemberControllerTest {
     }
 
     @Test
-    void signin() throws Exception {
+    void givenUser_whenSignin_thenRedirectToMypage() throws Exception {
         // given
-        memberService.signup(new MemberSignupDto("user1", "test1234"));
+        memberService.signup(new MemberSignupDto("testUser", "test1234"));
 
         // when
         ResultActions resultActions = mvc
                 .perform(post("/usr/signin")
                         .with(csrf())
-                        .param("username", "user1")
+                        .param("username", "testUser")
                         .param("password", "test1234"));
 
         // then
         resultActions
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrlPattern("/**"));
+                .andExpect(redirectedUrl("/usr/me"));
     }
 
     @Test
@@ -76,38 +73,37 @@ class MemberControllerTest {
     }
 
     @Test
-    void signup() throws Exception {
+    void whenSignup_thenSuccessAndRedirect() throws Exception {
         // given
-        MemberSignupDto dto = new MemberSignupDto("user2", "test1234");
 
         //when
         ResultActions resultActions = mvc
                 .perform(post("/usr/signup")
                         .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(mapper.writeValueAsString(dto)));
+                        .param("username", "testUser")
+                        .param("password", "test1234")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED));
 
         // then
         resultActions
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/"));
+                .andExpect(redirectedUrlPattern("/usr/signin?**"));
     }
 
-    // TODO: 유효하지 않은 비밀번호 테스트 - redirect 되도록 수정
     @Test
-    void signupWhenGivenInvalidPassword() throws Exception {
+    void givenInvalidPassword_whenSignup_thenClientError() throws Exception {
         // given
-        MemberSignupDto dto = new MemberSignupDto("user1", "123");
+        String invalidPassword = "123";
 
         //when
         ResultActions resultActions = mvc
                 .perform(post("/usr/signup")
                         .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(mapper.writeValueAsString(dto)));
+                        .param("username", "testUser")
+                        .param("password", invalidPassword)
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED));
 
         // then
-        resultActions
-                .andExpect(status().is4xxClientError());
+        resultActions.andExpect(status().is4xxClientError());
     }
 }
