@@ -2,6 +2,7 @@ package me.heartmon.domain.member.controller;
 
 import me.heartmon.domain.member.dto.MemberSignupDto;
 import me.heartmon.domain.member.service.MemberService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -26,6 +27,7 @@ class MemberControllerTest {
     @Autowired
     MemberService memberService;
 
+    @DisplayName("/usr/signin 엔드포인트는 usr/signin 뷰를 보여준다.")
     @Test
     void signinForm() throws Exception {
         // when
@@ -40,6 +42,7 @@ class MemberControllerTest {
                 .andExpect(view().name("usr/signin"));
     }
 
+    @DisplayName("등록되어 있는 아이디로 로그인할 경우 /usr/me 로 리디렉션된다.")
     @Test
     void givenUser_whenSignin_thenRedirectToMypage() throws Exception {
         // given
@@ -58,6 +61,7 @@ class MemberControllerTest {
                 .andExpect(redirectedUrl("/usr/me"));
     }
 
+    @DisplayName("/usr/signup 엔드포인트는 usr/signup 뷰를 보여준다.")
     @Test
     void signupForm() throws Exception {
         // when
@@ -72,6 +76,7 @@ class MemberControllerTest {
                 .andExpect(view().name("usr/signup"));
     }
 
+    @DisplayName("유효한 유저 정보로 회원가입하면 /usr/signin 로 리디렉션된다.")
     @Test
     void whenSignup_thenSuccessAndRedirect() throws Exception {
         // given
@@ -90,6 +95,7 @@ class MemberControllerTest {
                 .andExpect(redirectedUrlPattern("/usr/signin?**"));
     }
 
+    @DisplayName("유효하지 않은 유저 정보로 회원가입을 시도하면 Client Error.")
     @Test
     void givenInvalidPassword_whenSignup_thenClientError() throws Exception {
         // given
