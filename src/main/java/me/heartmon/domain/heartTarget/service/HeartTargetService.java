@@ -49,7 +49,7 @@ public class HeartTargetService {
         }
 
         InstaMember fromInstaMember = member.getInstaMember();
-        InstaMember toInstaMember = (InstaMember) instaMemberService.findByUsernameOrCreate(username).getData();
+        InstaMember toInstaMember = instaMemberService.findByUsernameOrCreate(username).getData();
 
         HeartTarget heartTarget = HeartTarget.builder()
                 .fromInstaMember(fromInstaMember)
