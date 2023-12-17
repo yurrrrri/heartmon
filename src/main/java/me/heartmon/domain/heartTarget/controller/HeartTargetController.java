@@ -34,6 +34,7 @@ public class HeartTargetController {
     public String heart(@Valid HeartTargetDto dto) {
         ResultData result = heartTargetService.heart(req.getMember(), dto);
 
+        if (result.getCode().equals("F-H1")) return "redirect:/insta-member/connect";
         if (result.isFail()) return req.historyBack(result);
 
         return req.redirectWithMsg("/heart-target/list", result);
